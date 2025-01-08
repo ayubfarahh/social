@@ -2,6 +2,8 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class Hello {
     public Hello() {
@@ -17,8 +19,8 @@ public class Hello {
         JPanel center = new JPanel(new GridLayout(6, 1, 10, 10));
         center.setBackground(null);
         center.setBorder(BorderFactory.createEmptyBorder(22, 231, 17, 231));
-        JTextField firstname = new JTextField("First Name");
-        center.add(firstname);
+        JTextField firstName = new JTextField("First Name");
+        center.add(firstName);
         JTextField lastName = new JTextField("Last Name");
         center.add(lastName);
         JTextField email = new JTextField("Email");
@@ -28,6 +30,58 @@ public class Hello {
         JTextField confirmPassword = new JTextField("Confirm Password");
         center.add(confirmPassword);
         JButton createAcc = new JButton("Create Account", 45, 20);
+
+
+        createAcc.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("Mouse clickd!");
+                if (firstName.getText().isEmpty()) {
+                    new Notification("First name cannot be empty", frame);
+                    return;
+                }
+                if (lastName.getText().isEmpty()) {
+                    new Notification("Last name cannot be empty", frame);
+                    return;
+                }
+                if (email.getText().isEmpty()) {
+                    new Notification("Email name cannot be empty", frame);
+                    return;
+                }
+                if (password.getText().isEmpty()) {
+                    new Notification("Password cannot be empty", frame);
+                    return;
+                }
+                if (confirmPassword.getText().isEmpty()) {
+                    new Notification("First name cannot be empty", frame);
+                    return;
+                }
+                if (!password.getText().equals(confirmPassword.getText())) {
+                    new Notification("Password doesn't match", frame);
+                    return;
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
         center.add(createAcc);
 
         panel.add(center, BorderLayout.CENTER);
@@ -43,6 +97,9 @@ public class Hello {
 
         // Finalize the frame setup (no need to set size or default close operation here)
         frame.setVisible(true);
+    }
+    public static void main(String[] args) {
+        new Hello();
     }
 
 }
